@@ -8,14 +8,6 @@ from reportlab.pdfgen import canvas
 
 import sqlite3
 
-
-
-
-
-
-
-
-
 def create_tables():
     conn = sqlite3.connect("insurance_new.db")
     cursor = conn.cursor()
@@ -219,12 +211,12 @@ def main_screen():
 
         conn.commit()
 
-        btn2 = ttk. Button(master,text = "register",command=register)
+        btn2 = ttk. Button(master,text = "Quote",command=register)
         btn2.place(x=500  , y = 690)
 
     def search():
         try:
-            conn = sqlite3.connect("insurance new.db")
+            conn = sqlite3.connect("insurance_new.db")
             cursor = conn.cursor()
             # Specify the table name in your query and use placeholders to prevent SQL injection
             sql = "SELECT * FROM vehicle_details WHERE carmake = ?"
@@ -338,7 +330,7 @@ def main_screen():
                                           """))
 
         def save_to_pdf():
-            filename = "insurance_details.pdf"
+            filename = "filename.pdf"
             c = canvas.Canvas(filename, pagesize=letter)
             # Drawing text on the canvas
             c.drawString(100, 750, "Policy Details")
@@ -354,8 +346,11 @@ def main_screen():
             print(f"PDF saved as {filename}")
 
         # Add a button in your Tkinter window to trigger the save_to_pdf function
-        save_pdf_button = Button(screen, text="Save as PDF", command=save_to_pdf)
+        save_pdf_button = Button(screen, text="Print", command=save_to_pdf)
+        save_pdf_button.place(x=150  , y = 690)
         save_pdf_button.pack()
+        
+        
         amount_text.place(x = 10,y =35)
 
         firstname_entry.delete(0,END)
